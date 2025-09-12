@@ -2,9 +2,9 @@ Rosbot DRV8833 Hardwired Motor Driver Library
 
 ℹ️ About
 
-This is a simple library for controlling the dual DRV8833 motor drivers on the Kittenbot Rosbot, specifically for units where the driver pins are hardwired.
-
+This is a simple library for controlling the dual DRV8833 motor drivers on the Kittenbot Rosbot, because driver pins are hardwired and there is lack of documentation on it.
 This library is designed to fill the gap for users who need a no-fuss solution for the pre-configured hardware setup on this specific device.
+For ease of others who simply want to know the pinouts, M1 is pins 5 & 6, 9 & 10. While M2 is 7 & 8, 12 & 13
 
 🛠️ Installation
 
@@ -16,7 +16,7 @@ Restart the Arduino IDE.
 
 
 
-Functions
+ℹ️ Functions
 
 setSpeed(int speed): Sets the motor speed and direction. Accepts values from -255 (full reverse) to 255 (full forward).
 
@@ -101,4 +101,5 @@ This project is for non-commercial use only. It is distributed under the GNU Gen
 📞 Contact
 
 Email: g-69106811@moe-dl.edu.my
+
 
