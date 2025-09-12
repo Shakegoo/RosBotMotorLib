@@ -8,13 +8,17 @@ For ease of others who simply want to know the pinouts, M1 is pins 5 & 6, 9 & 10
 
 🛠️ Installation
 
-Navigate to your Arduino IDE's libraries folder.
+On GitHub, click Code → Download ZIP to download the library.
 
-Copy this entire library folder into the libraries folder.
+Open the Arduino IDE.
 
-Restart the Arduino IDE.
+Go to Sketch → Include Library → Add .ZIP Library…
 
+Select the downloaded ZIP file and click Open.
 
+The library is now installed and ready to use.
+
+After installation, you can open the demo sketch via File → Examples → RosBotMotorLib → demo.
 
 ℹ️ Functions
 
@@ -101,6 +105,7 @@ This project is for non-commercial use only. It is distributed under the GNU Gen
 📞 Contact
 
 Email: g-69106811@moe-dl.edu.my
+
 
 
 
