@@ -1,4 +1,4 @@
-Rosbot DRV8833 Hardwired Motor Driver Library
+Rosbot DRV8833 Hardwired Motor Driver Library for Arduino IDE
 
 ℹ️ About
 
@@ -101,5 +101,6 @@ This project is for non-commercial use only. It is distributed under the GNU Gen
 📞 Contact
 
 Email: g-69106811@moe-dl.edu.my
+
 
 
