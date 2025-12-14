@@ -1,40 +1,35 @@
-#include "RosBotMotorM1.h"
-#include "RosBotMotorM2.h"
+#include <RosBotMotor.h>
 
-RosBotMotorM1 MotorRight;  // M1 driver
-RosBotMotorM2 MotorLeft;   // M2 driver
+// Create motor instances
+RosBotMotorM1 motorM1;
+RosBotMotorM2 motorM2;
 
 void setup() {
-    Serial.begin(115200);  
-    while (!Serial) { ; }  // wait for serial monitor
-    Serial.println("Press ENTER to run the motor test...");  // <-- comment out to skip prompt
+    // Nothing needed here
 }
 
 void loop() {
-    // If you want automatic loop, comment out the following 4 lines:
-    if (Serial.available()) {  
-        char c = Serial.read();
-        if (c == '\n' || c == '\r') {  // Enter pressed
-            Serial.println("Running motor test...");  // <-- optional, comment out for auto-run
-        } else return;  // skip rest of loop until Enter pressed
-    }
 
-    // Motor test sequence (always runs if above is commented)
-    MotorRight.setSpeed(255);  // forward
-    MotorLeft.setSpeed(255);
+    // Forward for 1 second
+    motorM1.setSpeed(150);
+    motorM2.setSpeed(150);
     delay(1000);
 
-    MotorRight.brake();         // active brake
-    MotorLeft.brake();
+    // Active brake for 1 second
+    motorM1.brake();
+    motorM2.brake();
     delay(1000);
 
-    MotorRight.setSpeed(-255); // reverse
-    MotorLeft.setSpeed(-255);
+    // Reverse for 1 second
+    motorM1.setSpeed(-150);
+    motorM2.setSpeed(-150);
     delay(1000);
 
-    MotorRight.setSpeed(0);    // coast
-    MotorLeft.setSpeed(0);
+    // Coast for 1 second
+    motorM1.setSpeed(0);
+    motorM2.setSpeed(0);
     delay(1000);
 
-    Serial.println("Test complete. Press ENTER to repeat.");  // <-- comment out for auto-run
+    // Pause before repeating
+    delay(1000);
 }
