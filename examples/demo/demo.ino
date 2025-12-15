@@ -1,35 +1,54 @@
 #include <RosBotMotor.h>
 
-// Create motor instances
-RosBotMotorM1 motorM1;
-RosBotMotorM2 motorM2;
+// Tank sides
+RosBotMotorM1 leftSide;   // M1 = LEFT motors
+RosBotMotorM2 rightSide;  // M2 = RIGHT motors
 
 void setup() {
-    // Nothing needed here
+    // Nothing required
 }
 
 void loop() {
 
-    // Forward for 1 second
-    motorM1.setSpeed(150);
-    motorM2.setSpeed(150);
+    // --- LEFT ONLY: forward 2 seconds ---
+    leftSide.setSpeed(150);
+    rightSide.setSpeed(0);
+    delay(2000);
+
+    // Brake
+    leftSide.brake();
     delay(1000);
 
-    // Active brake for 1 second
-    motorM1.brake();
-    motorM2.brake();
+
+    // --- RIGHT ONLY: forward 2 seconds ---
+    leftSide.setSpeed(0);
+    rightSide.setSpeed(150);
+    delay(2000);
+
+    // Brake
+    rightSide.brake();
     delay(1000);
 
-    // Reverse for 1 second
-    motorM1.setSpeed(-150);
-    motorM2.setSpeed(-150);
+
+    // --- BOTH: forward 2 seconds ---
+    leftSide.setSpeed(150);
+    rightSide.setSpeed(150);
+    delay(2000);
+
+    // Brake
+    leftSide.brake();
+    rightSide.brake();
     delay(1000);
 
-    // Coast for 1 second
-    motorM1.setSpeed(0);
-    motorM2.setSpeed(0);
-    delay(1000);
 
-    // Pause before repeating
-    delay(1000);
+    // --- BOTH: reverse 2 seconds ---
+    leftSide.setSpeed(-150);
+    rightSide.setSpeed(-150);
+    delay(2000);
+
+
+    // --- BOTH: coast ---
+    leftSide.setSpeed(0);
+    rightSide.setSpeed(0);
+    delay(2000);
 }
