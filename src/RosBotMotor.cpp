@@ -1,12 +1,12 @@
 #include "RosBotMotor.h"
 
-/* ===== RosBotMotorBase ===== */
+/* ===== Base class ===== */
 
 void RosBotMotorBase::initMotorPins() {
-    pinMode(IN1(), OUTPUT);
-    pinMode(IN2(), OUTPUT);
-    pinMode(IN3(), OUTPUT);
-    pinMode(IN4(), OUTPUT);
+    pinMode(A_PLUS(),  OUTPUT);
+    pinMode(A_MINUS(), OUTPUT);
+    pinMode(B_PLUS(),  OUTPUT);
+    pinMode(B_MINUS(), OUTPUT);
 
     setSpeed(0); // coast by default
 }
@@ -15,25 +15,27 @@ void RosBotMotorBase::writeMotorPins(int speed) {
     speed = constrain(speed, -255, 255);
 
     if (speed > 0) {
-        analogWrite(IN1(), speed);
-        digitalWrite(IN2(), LOW);
+        // Forward: A+ and B+ PWM, A- and B- LOW
+        analogWrite(A_PLUS(), speed);
+        digitalWrite(A_MINUS(), LOW);
 
-        analogWrite(IN3(), speed);
-        digitalWrite(IN4(), LOW);
+        analogWrite(B_PLUS(), speed);
+        digitalWrite(B_MINUS(), LOW);
 
     } else if (speed < 0) {
-        analogWrite(IN1(), -speed);
-        digitalWrite(IN2(), HIGH);
+        // Reverse: A- and B- PWM, A+ and B+ LOW
+        digitalWrite(A_PLUS(), LOW);
+        analogWrite(A_MINUS(), -speed);
 
-        analogWrite(IN3(), -speed);
-        digitalWrite(IN4(), HIGH);
+        digitalWrite(B_PLUS(), LOW);
+        analogWrite(B_MINUS(), -speed);
 
     } else {
-        // coast
-        digitalWrite(IN1(), LOW);
-        digitalWrite(IN2(), LOW);
-        digitalWrite(IN3(), LOW);
-        digitalWrite(IN4(), LOW);
+        // Coast: all LOW
+        digitalWrite(A_PLUS(),  LOW);
+        digitalWrite(A_MINUS(), LOW);
+        digitalWrite(B_PLUS(),  LOW);
+        digitalWrite(B_MINUS(), LOW);
     }
 }
 
@@ -42,10 +44,11 @@ void RosBotMotorBase::setSpeed(int speed) {
 }
 
 void RosBotMotorBase::brake() {
-    digitalWrite(IN1(), HIGH);
-    digitalWrite(IN2(), HIGH);
-    digitalWrite(IN3(), HIGH);
-    digitalWrite(IN4(), HIGH);
+    // Active brake: all HIGH
+    digitalWrite(A_PLUS(),  HIGH);
+    digitalWrite(A_MINUS(), HIGH);
+    digitalWrite(B_PLUS(),  HIGH);
+    digitalWrite(B_MINUS(), HIGH);
 }
 
 /* ===== M1 ===== */
