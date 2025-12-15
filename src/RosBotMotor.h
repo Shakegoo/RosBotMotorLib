@@ -4,7 +4,8 @@
 #include <Arduino.h>
 
 /*
- * Base class: shared DRV8833 motor behavior
+ * Base class: shared DRV8833 tank-side behavior
+ * One instance = one driver = two motors (A + B channels)
  */
 class RosBotMotorBase {
 public:
@@ -14,11 +15,11 @@ public:
     void brake();
 
 protected:
-    // Hardwired pins supplied by derived classes
-    virtual uint8_t IN1() const = 0;
-    virtual uint8_t IN2() const = 0;
-    virtual uint8_t IN3() const = 0;
-    virtual uint8_t IN4() const = 0;
+    // Hardwired pins provided by derived classes
+    virtual uint8_t A_PLUS()  const = 0;
+    virtual uint8_t A_MINUS() const = 0;
+    virtual uint8_t B_PLUS()  const = 0;
+    virtual uint8_t B_MINUS() const = 0;
 
     void initMotorPins();
 
@@ -27,31 +28,31 @@ private:
 };
 
 /*
- * Motor M1 (DRV8833 chip #1, hardwired pins)
+ * M1: LEFT SIDE (two motors, pins 5,6,9,10)
  */
 class RosBotMotorM1 : public RosBotMotorBase {
 public:
     RosBotMotorM1();
 
 protected:
-    uint8_t IN1() const override { return 5; }
-    uint8_t IN2() const override { return 6; }
-    uint8_t IN3() const override { return 9; }
-    uint8_t IN4() const override { return 10; }
+    uint8_t A_PLUS()  const override { return 5; }
+    uint8_t A_MINUS() const override { return 6; }
+    uint8_t B_PLUS()  const override { return 9; }
+    uint8_t B_MINUS() const override { return 10; }
 };
 
 /*
- * Motor M2 (DRV8833 chip #2, hardwired pins)
+ * M2: RIGHT SIDE (two motors, pins 7,8,12,13)
  */
 class RosBotMotorM2 : public RosBotMotorBase {
 public:
     RosBotMotorM2();
 
 protected:
-    uint8_t IN1() const override { return 7; }
-    uint8_t IN2() const override { return 8; }
-    uint8_t IN3() const override { return 11; }
-    uint8_t IN4() const override { return 12; }
+    uint8_t A_PLUS()  const override { return 7; }
+    uint8_t A_MINUS() const override { return 8; }
+    uint8_t B_PLUS()  const override { return 12; }
+    uint8_t B_MINUS() const override { return 13; }
 };
 
 #endif
